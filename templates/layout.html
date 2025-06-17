@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Вечеринка{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://static.tildacdn.info/tild3665-3136-4133-a533-633265306663/1000091424.jpg" rel="shortcut icon" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&subset=latin,cyrillic" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
+            color: #f8f9fa;
+        }
+        .navbar {
+            background-color: #111 !important;
+            border-bottom: 2px solid #ff00ff;
+        }
+        .btn-outline-light:hover,
+        .btn-outline-warning:hover,
+        .btn-outline-info:hover,
+        .btn-outline-danger:hover {
+            background-color: #ff00ff;
+            color: white;
+        }
+        .btn-primary {
+            background-color: #ff00ff;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #cc00cc;
+        }
+        .neon-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #ff00ff;
+            box-shadow: 0 0 20px #ff00ff;
+        }
+        @media (max-width: 576px) {
+            .navbar img {
+                width: 90px !important;
+            }
+        }
+        html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
+    color: #f8f9fa;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+    </style>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<style>
+    .navbar {
+        border-bottom: none !important;
+        box-shadow: none !important;
+    }
+	.navbar.bg-black {
+        background-color: #000000 !important;
+    }
+	</style>
+</head>
+<body class="text-light">
+<!-- Preloader -->
+<div id="page-preloader" style="
+    position: fixed;
+    top:0; left:0;
+    width:100vw; height:100vh;
+    background: #000000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.6s ease;
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+">
+    <!-- Логотип: можно вставить картинку или svg -->
+    <img src="https://static.tildacdn.info/tild3665-3136-4133-a533-633265306663/1000091424.jpg" alt="Логотип" style="width:150px; height:auto;">
+    <div style="font-size: 1.5rem; letter-spacing: 0.12em; user-select: none;">
+        𝙱𝚊𝚔𝚒𝚗𝚜𝚔𝚊𝚢𝚊 𝚂𝚞𝚎𝚝𝚊
+    </div>
+</div>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-black mb-4">
+    <div class="container">
+        <a href="{{ url_for('event_page') }}" class="d-flex align-items-center text-decoration-none me-3" style="font-family: 'Oswald', sans-serif;">
+            <img alt="Bakinskaya Sueta"
+                 src="https://static.tildacdn.info/tild3665-3136-4133-a533-633265306663/1000091424.jpg"
+                 style="width: 70px; height: auto; margin-right: 8px;">
+            <span class="navbar-brand mb-0 h1 fs-4 text-white">Project X</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="ms-auto d-flex flex-column flex-lg-row align-items-start align-items-lg-center gap-2 mt-3 mt-lg-0">
+
+                <!-- Просто текст "Меню" -->
+                <a class="text-white text-decoration-none" href="{{ url_for('party_menu') }}" style="font-family: 'Oswald', sans-serif; padding-right: 30px; font-size: 20px;">Меню</a>
+
+                <!-- Ссылка на пост Telegram -->
+                <a class="text-white text-decoration-none" href="https://t.me/c/2024925175/192" target="_blank" style="font-family: 'Oswald', sans-serif;
+
+																														padding-right: 30px;
+																														font-size: 20px;">Розыгрыш</a>
+
+                {% if not current_user.is_authenticated %}
+                    <!-- Белые кнопки с черным текстом -->
+                    <a class="btn btn-light text-black" style="font-family: 'Oswald', sans-serif;" href="{{ url_for('register') }}">Регистрация</a>
+                    <a class="btn btn-light text-black" style="font-family: 'Oswald', sans-serif;" href="{{ url_for('login') }}">Вход</a>
+
+                    <!-- Кнопка Telegram -->
+                    <a class="btn btn-light text-black d-flex align-items-center" href="https://t.me/bsformbot" target="_blank" style="font-family: 'Oswald', sans-serif;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-telegram me-1" viewBox="0 0 16 16">
+                            <path d="M16 1.538a1.946 1.946 0 0 0-2.745-1.846L.45 6.14a.5.5 0 0 0 .081.927l3.93 1.223 1.307 3.921a.5.5 0 0 0 .934.08l1.845-2.645 3.498 2.574a.5.5 0 0 0 .778-.363L16 1.538z"/>
+                        </svg>
+                        Вступить
+                    </a>
+                {% else %}
+                    <a class="btn btn-light text-black" style="font-family: 'Oswald', sans-serif;" href="{{ url_for('dashboard') }}">Профиль</a>
+                    {% if current_user.is_admin %}
+                        <a class="btn btn-light text-black" style="font-family: 'Oswald', sans-serif;" href="{{ url_for('admin_user_list') }}">Админ-панель</a>
+                    {% endif %}
+                    <a class="btn btn-light text-black" style="font-family: 'Oswald', sans-serif;" href="{{ url_for('logout') }}">Выход</a>
+				<a class="btn btn-light text-black d-flex align-items-center" href="https://t.me/bsformbot" target="_blank" style="font-family: 'Oswald', sans-serif;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-telegram me-1" viewBox="0 0 16 16">
+                            <path d="M16 1.538a1.946 1.946 0 0 0-2.745-1.846L.45 6.14a.5.5 0 0 0 .081.927l3.93 1.223 1.307 3.921a.5.5 0 0 0 .934.08l1.845-2.645 3.498 2.574a.5.5 0 0 0 .778-.363L16 1.538z"/>
+                        </svg>
+                        Вступить
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container mb-5">
+    {% block content %}{% endblock %}
+</div>
+<script>
+(function() {
+    const preloader = document.getElementById('page-preloader');
+    if (!preloader) return;
+
+    const minDisplayTime = 600; // 1.2 секунды
+
+    const startTime = Date.now();
+
+    function hidePreloader() {
+        preloader.style.opacity = '0';
+        setTimeout(() => {
+            preloader.style.display = 'none';
+        }, 600); // совпадает с transition
+    }
+
+    window.addEventListener('load', () => {
+        const elapsed = Date.now() - startTime;
+        const remaining = minDisplayTime - elapsed;
+
+        if (remaining > 0) {
+            setTimeout(hidePreloader, remaining);
+        } else {
+            hidePreloader();
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('a[href]').forEach(link => {
+            const href = link.getAttribute('href');
+            if (
+                href.startsWith('#') || href.startsWith('javascript:') || href.startsWith('mailto:') ||
+                href.startsWith('tel:') || link.target === '_blank'
+            ) {
+                return;
+            }
+
+            link.addEventListener('click', () => {
+                preloader.style.display = 'flex';
+                preloader.style.opacity = '1';
+            });
+        });
+    });
+})();
+</script>
+<footer class="bg-dark text-white text-center py-3 border-top border-secondary mt-auto">
+    <div class="container">
+        <small>
+            © Все права на сайт принадлежат нашей
+            <a href="https://t.me/bsformbot" class="text-info text-decoration-none" target="_blank">
+                Telegram-группе
+            </a>
+            и защищены законом Азербайджанской Республики.
+        </small>
+    </div>
+</footer>
+</body>
+</html>

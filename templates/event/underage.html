@@ -1,0 +1,10 @@
+
+{% extends 'layout.html' %}
+{% block title %}Возрастное ограничение{% endblock %}
+
+{% block content %}
+<div class="alert alert-danger">
+    <h4>Извините, доступ запрещён!</h4>
+    <p>Вам только {{ age }} лет. Вход на вечеринку разрешён только лицам старше 18 лет и не старше 30 лет.</p>
+</div>
+{% endblock %}

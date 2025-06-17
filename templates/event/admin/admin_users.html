@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+{% block title %}Админ-панель{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Список пользователей</h2>
+
+<form method="get" class="mb-3">
+    <label class="form-label">Фильтр по статусу билета:</label>
+    <select name="status" class="form-select w-auto d-inline-block">
+        <option value="">Все</option>
+        <option value="not_paid" {% if status_filter == 'not_paid' %}selected{% endif %}>Не оплачен</option>
+        <option value="paid" {% if status_filter == 'paid' %}selected{% endif %}>Оплачен</option>
+        <option value="rejected" {% if status_filter == 'rejected' %}selected{% endif %}>Отклонён</option>
+    </select>
+    <button type="submit" class="btn btn-primary ms-2">Фильтровать</button>
+</form>
+<form method="get" action="{{ url_for('export_excel') }}" class="mb-3">
+    <input type="hidden" name="status" value="{{ status_filter }}">
+    <button type="submit" class="btn btn-success mt-3">Скачать Excel</button>
+</form>
+
+<div class="table-responsive">
+    <table class="table table-striped table-dark">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>ФИО</th>
+                <th>Дата рождения</th>
+                <th>Telegram</th>
+                <th>Статус</th>
+                <th>Действие</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.last_name }} {{ user.first_name }} {{ user.middle_name }}</td>
+                <td>{{ user.birth_date }}</td>
+                <td>{{ user.telegram or '-' }}</td>
+                <td>
+                    {% if user.ticket_status == 'paid' %}
+                        <span class="text-success">Оплачен</span>
+                    {% elif user.ticket_status == 'rejected' %}
+                        <span class="text-warning">Отклонён</span>
+                    {% else %}
+                        <span class="text-danger">Не оплачен</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{{ url_for('ticket_status', user_id=user.id) }}" class="btn btn-outline-info btn-sm">Открыть</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

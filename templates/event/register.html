@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+<h2>Регистрация</h2>
+<form method="post" class="col-md-6 mx-auto">
+    <p class="text-danger small mt-2">
+⚠️ Указывайте <strong>данные точно как в удостоверении личности</strong>. Без документа вход невозможен.
+</p>
+
+    <div class="mb-3">
+    <label class="form-label">Имя</label>
+    <input name="first_name" class="form-control" required>
+</div>
+<div class="mb-3">
+    <label class="form-label">Фамилия</label>
+    <input name="last_name" class="form-control" required>
+</div>
+<div class="mb-3">
+    <label class="form-label">Отчество</label>
+    <input name="middle_name" class="form-control" required>
+</div>
+
+    <div class="mb-3">
+        <label class="form-label">Дата рождения</label>
+        <input name="birth_date" type="date" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Telegram (необязательно)</label>
+        <input name="telegram" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label for="gender" class="form-label">Пол:</label>
+        <select class="form-select" id="gender" name="gender" required>
+            <option value="male">Мужской</option>
+            <option value="female">Женский</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Логин</label>
+        <input name="username" class="form-control" required minlength="6">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Пароль</label>
+        <input name="password" type="password" class="form-control" required minlength="8">
+    </div>
+    <div class="form-check mt-3">
+    <input class="form-check-input" type="checkbox" name="agree_terms" required>
+    <label class="form-check-label mb-5">
+        Я принимаю <a href="{{ url_for('terms') }}" target="_blank">пользовательское соглашение</a>
+    </label>
+    </div>
+    <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+</form>
+{% endblock %}

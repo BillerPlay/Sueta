@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+{% block title %}Купить билет{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Купить билет</h2>
+
+<div class="card p-4 bg-secondary text-light shadow">
+
+    {% if current_user.gender.value == 'male' %}
+        <p>💵 <strong>Сумма к оплате:</strong> 25 AZN</p>
+    {% elif current_user.gender.value == 'female' %}
+        <p>💵 <strong>Сумма к оплате:</strong> 15 AZN</p>
+    {% else %}
+        <p>💵 <strong>Сумма к оплате:</strong> {{ amount }}</p>
+    {% endif %}
+
+    <p class="mt-2" style="color: #00ff88;">
+    🎁 Если вы пригласили <strong>3-х друзей</strong>, билет для вас <strong>бесплатный</strong>!
+</p>
+
+    <p>📲 <strong>Оплатите по P2P на мою карту:</strong></p>
+    <ul>
+        <li><strong>Telegram для связи:</strong> {{ tg }}</li>
+        <li><strong>Номер карты:</strong> <b>4098 5844 9690 0299</b></li>
+    </ul>
+
+    <hr>
+
+    <h5>Ваш персональный QR-код для входа:</h5>
+    <img src="{{ qr_image }}" width="200" class="border border-light rounded">
+
+    <p class="mt-3"><i>После оплаты покажите этот QR-код администратору или охране на входе.</i></p>
+
+    <div class="alert alert-warning mt-4">
+        ⚠️ Не забудьте взять с собой <strong>удостоверение личности</strong>! Без документа вход будет запрещён.
+    </div>
+
+</div>
+{% endblock %}

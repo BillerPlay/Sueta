@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+{% block title %}Профиль{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Добро пожаловать, {{ current_user.first_name }} {{ current_user.last_name }} {{ current_user.middle_name }}!</h2>
+
+<div class="mb-3">
+    <p><b>Дата рождения:</b> {{ current_user.birth_date }}</p>
+    <p><b>Telegram:</b> {{ current_user.telegram or 'Не указан' }}</p>
+</div>
+
+<p><b>Статус билета:</b>
+    {% if current_user.ticket_status == 'paid' %}
+        <span class="text-success">✅ Оплачен</span>
+    {% elif current_user.ticket_status == 'rejected' %}
+        <span class="text-warning">⛔ Отклонён</span>
+    {% else %}
+        <span class="text-danger">❌ Не оплачен</span>
+    {% endif %}
+</p>
+
+{% if current_user.ticket_status != 'paid' %}
+    <a href="{{ url_for('buy_ticket') }}" class="btn btn-warning mt-3">Купить билет</a>
+{% else %}
+    <div class="alert alert-success mt-4">
+        🎉 <strong>Ваш билет успешно оплачен!</strong><br>
+        Не забудьте принести удостоверение личности на входе.
+    </div>
+
+    <div class="mt-4">
+        <h5>Ваш QR-код для входа</h5>
+        <img src="{{ url_for('static', filename='qrcodes/user_' ~ current_user.id ~ '.png') }}" width="180" class="border rounded">
+
+        <p class="text-muted small mt-2">Покажите этот код на входе охране.</p>
+    </div>
+{% endif %}
+{% endblock %}

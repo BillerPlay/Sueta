@@ -1,0 +1,78 @@
+body {
+  margin: 0;
+  font-family: 'Oswald', sans-serif;
+  background-color: #000;
+  color: #fff;
+}
+
+nav {
+  background-color: #000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px;
+  border-bottom: 1px solid #333;
+}
+
+nav .logo img {
+  width: 90px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  margin-left: 20px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+.hero {
+  text-align: center;
+  padding: 100px 20px;
+  background-image: url('https://static.tildacdn.info/tild6566-6666-4365-b937-646361646664/photo.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.hero h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 8px #000;
+}
+
+.hero p {
+  font-size: 24px;
+  text-shadow: 1px 1px 4px #000;
+}
+
+.about {
+  padding: 60px 20px;
+  text-align: center;
+  background-color: #111;
+}
+
+.about h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+footer {
+  padding: 20px;
+  background-color: #000;
+  text-align: center;
+  border-top: 1px solid #333;
+  font-size: 14px;
+}
