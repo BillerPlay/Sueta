@@ -163,7 +163,7 @@ def buy_ticket():
     qr_dir = os.path.join('static', 'qrcodes')
     os.makedirs(qr_dir, exist_ok=True)
 
-    qr_data = f"{request.host_url}ticket_status/{current_user.id}"
+    qr_data = f"https://sueta-taiq.onrender.com/ticket_status/{current_user.id}"
     img = qrcode.make(qr_data)
     qr_path = os.path.join(qr_dir, f"user_{current_user.id}.png")
     img.save(qr_path)
