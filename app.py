@@ -23,6 +23,10 @@ login_manager = LoginManager()
 login_manager.login_view = 'login'
 login_manager.init_app(app)
 
+from werkzeug.middleware.proxy_fix import ProxyFix
+
+app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
+
 from enum import Enum
 from sqlalchemy import Enum as SqlEnum
 
@@ -62,13 +66,16 @@ def become_sponsor():
 @app.route('/contacts')
 def contacts():
     return render_template('contacts.html')
+'''
 @app.route('/merch')
 def merch():
     return render_template('merch.html')
+'''
 @app.route('/no_event')
 def no_event():
     return render_template('no_event.html')
 
+'''
 @app.route('/event/')
 def event_page():
     return render_template('event/event_page.html')
@@ -246,7 +253,7 @@ def sets():
 @app.route('/event/terms')
 def terms():
     return render_template('/event/terms.html')
-
+'''
 @app.errorhandler(403)
 def forbidden(e):
     return render_template('/event/403.html'), 403
@@ -259,7 +266,7 @@ from flask import send_file, request
 import io
 from openpyxl import Workbook
 
-
+'''
 @app.route('/export_excel')
 @admin_required
 def export_excel():
@@ -312,6 +319,7 @@ def export_excel():
         download_name="users.xlsx",
         mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
+'''
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
